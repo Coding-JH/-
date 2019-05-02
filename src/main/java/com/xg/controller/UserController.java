@@ -29,14 +29,11 @@ public class UserController {
     @RequestMapping("/login")
     @ResponseBody
     public ResultMap login(User user, HttpSession session){
-        System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
-
+        String code=user.getPassword();
         User user1=userService.loginUser(user.getUsername());
-        System.out.println("-----------"+user1.getPassword());
         ResultMap resultMap=new ResultMap();
         if(null!=user1){
-            if(user1.getPassword()==user.getPassword()){
+            if(user1.getPassword().equals(code)){
                 session.setAttribute("name",user1.getUsername());
                 resultMap.setStatus(200);
                 resultMap.setMsg("登录成功");
@@ -89,7 +86,7 @@ public class UserController {
     }
 
     /**
-     * 检验用户名
+     * 检验用户名（后端）
      * @param userName
      * @return
      */
@@ -110,15 +107,18 @@ public class UserController {
             return resultMap;
         }
     }
+
     /**
-     * 展示开发者文档
+     * 跳转到展示开发者文档界面
+     * @return
      */
     @RequestMapping("/userHelp")
     public String userHelp(){
         return "userHelp";
     }
     /**
-     * 个人主页
+     * 跳转到个人主页
+     * @return
      */
     @RequestMapping("/userHome")
     public String userHome(){

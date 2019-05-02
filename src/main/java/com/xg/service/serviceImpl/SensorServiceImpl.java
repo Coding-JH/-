@@ -3,6 +3,7 @@ package com.xg.service.serviceImpl;
 import com.xg.dao.SensorDescMapper;
 import com.xg.dao.SensorMapper;
 import com.xg.pojo.Sensor;
+import com.xg.pojo.SensorExample;
 import com.xg.service.SensorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,4 +36,12 @@ public class SensorServiceImpl implements SensorService  {
         sensorMapper.deleteByPrimaryKey(id);
         sensorDescMapper.deleteByPrimaryKey(id);
     }
+    @Override
+    public List<Sensor> searchByName(String name) {
+        SensorExample example = new SensorExample();
+        SensorExample.Criteria criteria = example.createCriteria();
+        criteria.andNameEqualTo(name);
+        return sensorMapper.selectByExample(example);
+    }
+
 }

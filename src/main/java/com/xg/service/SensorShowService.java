@@ -14,4 +14,6 @@ public interface SensorShowService {
     void insertSensorShow(SensorShow sensorShow);
 
     List<Sensor> findAll();
+
+    void updateSensorShow(SensorShow sensorShow);
 }

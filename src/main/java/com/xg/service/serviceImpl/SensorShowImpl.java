@@ -26,4 +26,12 @@ public class SensorShowImpl implements SensorShowService {
     public List<Sensor> findAll() {
         return sensorShowMapper.listAll();
     }
+
+    @Override
+    public void updateSensorShow(SensorShow sensorShow) {
+        sensorShowMapper.updateByPrimaryKeySelective(sensorShow);
+    }
+
+
+
 }

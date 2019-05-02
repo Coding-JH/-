@@ -13,11 +13,11 @@ import com.xg.service.SensorShowService;
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -25,9 +25,9 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by 侯景瀚 on 2019/4/27.
+ * Created by Mr.Hou on 2019/4/27.
  */
-@RestController
+@Controller
 @RequestMapping("/sensor")
 public class SensorController {
     @Autowired
@@ -40,13 +40,28 @@ public class SensorController {
     /** 获取图片服务器的地址 */
     @Value("${IMAGE_SERVER_URL}")
     private String imageServerUrl;
+
+    /**
+     * 搜索Sensor
+     * @param name
+     * @param model
+     * @return
+     */
+    @RequestMapping("/search")
+    public String search(@RequestParam String name, Model model){
+        List<Sensor> searchList=sensorService.searchByName(name);
+        model.addAttribute("searchList",searchList);
+        return "/sensor/list";
+    }
+
+
     /**
      * 上传图片
-     *
      * @param uploadFile
      * @return
      */
-    @PostMapping("/pic/upload")
+    @RequestMapping("/pic/upload")
+    @ResponseBody
     public PictureResult uploadFile(MultipartFile uploadFile) {
         // 把图片上传到图片服务器
         FastDfsClient fastDFSClient = new FastDfsClient(tracker_server);
@@ -77,6 +92,7 @@ public class SensorController {
      * @return
      */
     @RequestMapping("/add")
+    @ResponseBody
     public ResultMap addSensor(Sensor sensor, SensorShow sensorShow){
         Long id=IDUtils.genItemId();
         ResultMap resultMap=new ResultMap();
@@ -96,23 +112,23 @@ public class SensorController {
     }
     /**
      * 删除传感器
-     * @param id
+     * @param id 传感器的id
      * @return
      */
     @RequestMapping("/delete")
+    @ResponseBody
     public ResultMap deleteSensor(Long id){
-        ResultMap resultMap=new ResultMap();
         sensorService.deleteSensor(id);
-        resultMap.setMsg("删除成功");
-        return resultMap;
+        return ResultMap.build(500,"删除成功");
     }
     /**
      * 展示传感器
-     * @param pn
+     * @param pn 传感器总数
      * @param model
      * @return
      */
     @RequestMapping("/list")
+    @ResponseBody
     public ResultMap listSensor(@RequestParam(value = "pn",defaultValue = "1")Integer pn, Model model){
 
         PageHelper.startPage(pn,3);
@@ -124,7 +140,8 @@ public class SensorController {
         return resultMap;
     }
     /**
-     * 展示硬件
+     * 跳转到硬件展示页面
+     * @return
      */
     @RequestMapping("/showSensor")
     public String showSensor(){

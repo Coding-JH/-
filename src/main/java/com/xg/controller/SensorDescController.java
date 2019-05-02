@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Date;
 
 /**
- * Created by 侯景瀚 on 2019/4/30.
+ * Created by Mr.Hou on 2019/4/30.
  */
 @RestController
 @RequestMapping("/sensorDesc")
@@ -20,11 +20,15 @@ public class SensorDescController {
     @Autowired
     SensorDescService sensorDescService;
 
-    @RequestMapping("/add")
-    public ResultMap addSensorData(){  //温度的变化
+    /**
+     * 嵌入式实时发送数据
+     * @param resultData
+     * @return
+     */
+    @RequestMapping("/uploadData")
+    public ResultMap addSensorData(String resultData){  //温度的变化
 
-        String res="22-111-88";
-        String[] arr=res.split("-");
+        String[] arr=resultData.split("-");
         ResultMap resultMap=new ResultMap();
         String data=JSON.toJSONString(arr);
 

@@ -3,7 +3,7 @@ package com.xg.common;
 import java.io.Serializable;
 
 /**
- * Created by 侯景瀚 on 2019/4/29.
+ * Created by Mr.Hou on 2019/4/29.
  */
 public class PictureResult implements Serializable {
     private static final long serialVersionUID = 1L;

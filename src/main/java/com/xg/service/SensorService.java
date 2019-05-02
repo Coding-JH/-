@@ -13,4 +13,7 @@ public interface SensorService {
     List<Sensor> findAllSensor();
 
     void deleteSensor(Long id);
+
+    List<Sensor> searchByName(String name);
+
 }
