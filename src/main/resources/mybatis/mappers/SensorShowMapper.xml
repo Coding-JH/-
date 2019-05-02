@@ -193,4 +193,12 @@
       picture = #{picture,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="listAll" resultMap="BaseResultMap">
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sensor_show
+  </select>
 </mapper>

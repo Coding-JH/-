@@ -1,5 +1,6 @@
 package com.xg.dao;
 
+import com.xg.pojo.Sensor;
 import com.xg.pojo.SensorShow;
 import com.xg.pojo.SensorShowExample;
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +29,6 @@ public interface SensorShowMapper {
     int updateByPrimaryKeySelective(SensorShow record);
 
     int updateByPrimaryKey(SensorShow record);
+
+    List<Sensor> listAll();
 }
