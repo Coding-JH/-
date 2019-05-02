@@ -20,6 +20,12 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    /**
+     * 登录
+     * @param user
+     * @param session
+     * @return
+     */
     @RequestMapping("/login")
     @ResponseBody
     public ResultMap login(User user, HttpSession session){
@@ -48,6 +54,8 @@ public class UserController {
     }
     /**
      * 退出登录的功能
+     * @param session
+     * @return
      */
     @RequestMapping("/outLogin")
     public String outLogin(HttpSession session) {
@@ -55,7 +63,10 @@ public class UserController {
         return "login";
     }
     /**
-     * 注册功能
+     * 注册
+     * @param user
+     * @param session
+     * @return
      */
     @RequestMapping("/regist")
     public ResultMap register(User user, HttpSession session) {
@@ -76,6 +87,12 @@ public class UserController {
         session.setAttribute("name", user.getUsername());
         return resultMap;
     }
+
+    /**
+     * 检验用户名
+     * @param userName
+     * @return
+     */
     public ResultMap checkUser(@RequestParam("userName") String userName){
         ResultMap resultMap=new ResultMap();
         //先判断用户名是否是合法的表达式;

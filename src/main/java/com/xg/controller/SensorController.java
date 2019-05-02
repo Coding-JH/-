@@ -72,6 +72,8 @@ public class SensorController {
 
     /**
      * 增加传感器
+     * @param sensor
+     * @param sensorShow
      * @return
      */
     @RequestMapping("/add")
@@ -94,6 +96,8 @@ public class SensorController {
     }
     /**
      * 删除传感器
+     * @param id
+     * @return
      */
     @RequestMapping("/delete")
     public ResultMap deleteSensor(Long id){
@@ -104,6 +108,9 @@ public class SensorController {
     }
     /**
      * 展示传感器
+     * @param pn
+     * @param model
+     * @return
      */
     @RequestMapping("/list")
     public ResultMap listSensor(@RequestParam(value = "pn",defaultValue = "1")Integer pn, Model model){
