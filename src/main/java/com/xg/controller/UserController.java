@@ -7,6 +7,7 @@ import com.xg.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -26,7 +27,7 @@ public class UserController {
      * @param session
      * @return
      */
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login",method =RequestMethod.POST)
     @ResponseBody
     public ResultMap login(User user, HttpSession session){
         String code=user.getPassword();
@@ -65,7 +66,7 @@ public class UserController {
      * @param session
      * @return
      */
-    @RequestMapping("/regist")
+    @RequestMapping(value ="/regist",method =RequestMethod.POST)
     public ResultMap register(User user, HttpSession session) {
         ResultMap resultMap=new ResultMap();
         //数据库用户名重复校验
@@ -120,8 +121,16 @@ public class UserController {
      * 跳转到个人主页
      * @return
      */
-    @RequestMapping("/userHome")
-    public String userHome(){
-        return "userHome";
+    @RequestMapping(value ="/login",method= RequestMethod.GET)
+    public String userlogin(){
+        return "login";
+    }
+    @RequestMapping(value ="/regist",method= RequestMethod.GET)
+    public String userregist(){
+        return "regist";
+    }
+    @RequestMapping(value ="/next",method= RequestMethod.GET)
+    public String next(){
+        return "main";
     }
 }

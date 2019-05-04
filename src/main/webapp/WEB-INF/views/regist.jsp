@@ -1,58 +1,58 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 侯景瀚
-  Date: 2018/11/6
-  Time: 22:24
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>注册</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/static/Font-Awesome-3.2.1/Font-Awesome-3.2.1/css/font-awesome.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/static/css/register.css">
 </head>
 <body>
-<h1 align="center">欢迎注册</h1>
-${pageContext.request.contextPath}
-<form id="form1">
-    <table border="1" bordercolor="#3333FF" width="25%" align="center" height="10%" cellpadding="5" cellpacing="0">
-        <tr>
-            <td>用户名：</td>
-            <td><input type="text" id="user_name"></td>
-        </tr>
-        <tr>
-            <td>密  码:</td>
-            <td><input type="password" id="password1" ></td>
-        </tr>
-        <tr>
-            <td>确认密码:</td>
-            <td><input type="password" id="password2"></td>
-        </tr>
-        <tr>
-            <td>邮箱:</td>
-            <td><input type="email" id="user_email"></td>
-        </tr>
-        <tr>
-            <td><a type="button" class="button" onclick="sub()" name="注册"></a>/td>
-        </tr>
+<div class="formContainer">
+    <h2 style="color: #2A9F96; text-align: center; font-family: '华文新魏'">电力通信的“全科医生”</h2>
+    <form id="registerForm">
+        <div class="formGroups">
+            <span class="icon-user iconStyle"></span>
+            <input class="info" type="text" name="name" id="username"
+                   placeholder="请设置一个2-10位的用户名"/>
+        </div>
+        <label class="errorItems"></label>
+        <div class="formGroups">
+            <span class="icon-phone iconStyle"></span>
+            <input class="info" type="text" name="phone" id="phoneNumber"
+                   placeholder="请输入您的手机号码"/>
+        </div>
+        <label></label>
+        <div class="formGroups">
+            <span class="icon-envelope iconStyle"></span>
+            <input class="info" type="text" name="email" id="email"
+                   placeholder="请输入您的有效邮箱"/>
+        </div>
+        <label></label>
+        <div class="formGroups">
+            <span class="icon-lock iconStyle"></span>
+            <input class="info" type="password" name="password" id="password"
+                   placeholder="请设置一个6-15位的密码"/>
+        </div>
+        <label></label>
+        <div class="formGroups">
+            <span class="icon-pushpin iconStyle"></span>
+            <input class="info" type="password" name="confirmPassword" id="confirmPassword"
+                   placeholder="请确认密码"/>
+        </div>
+        <label></label>
+        <input class="confirmButton buttonStyle" style="width:100%;margin: 0 auto;" type="button" value="立即注册"/>
+    </form>
+</div>
+<div id="cloud"></div>
 
-    </table>
-</form>
+<script type="text/javascript" src="/static/js/jquery.min.js"></script>
+<script src="/static/js/jquery.validate.min.js"></script>
+<script src="/static/common.js"></script>
+<script src="/static/js/register.js"></script>
 </body>
-<script type="text/javascript">
-    function sub(){
-        $.ajax({
-            url:'${pageContext.request.contextPath}/user/regist',
-            data:$('form1').serialize(),
-            type:'POST',
-            dataType:'json',
-            success:function(result){
-                console.log(result);
-                alert("SUCCESS");
-            },
-            error:function () {
-                alert("Fail");
-            }
-        });
-    }
-</script>
 </html>

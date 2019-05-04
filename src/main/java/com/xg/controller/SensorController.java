@@ -54,7 +54,6 @@ public class SensorController {
         return "/sensor/list";
     }
 
-
     /**
      * 上传图片
      * @param uploadFile
@@ -81,8 +80,9 @@ public class SensorController {
         }
         // 补充为完整的url
         url = imageServerUrl + url;
+        System.out.println(url+"##############################");
         // 响应json
-        return new PictureResult().setError(error).setUrl(url).setMessage(message);
+        return new PictureResult().setError(error).setUrl(url).setMessage(message); //图片链接在页面传递给后台
     }
 
     /**
@@ -131,21 +131,25 @@ public class SensorController {
     @ResponseBody
     public ResultMap listSensor(@RequestParam(value = "pn",defaultValue = "1")Integer pn, Model model){
 
-        PageHelper.startPage(pn,3);
+        PageHelper.startPage(pn,5);
         List<Sensor> sensorList= sensorService.findAllSensor();
-        model.addAttribute("sensorList",sensorList);
         PageInfo pageInfo=new PageInfo(sensorList,3);
-        ResultMap resultMap=new ResultMap();
-        resultMap.setData(pageInfo);
-        return resultMap;
+        return ResultMap.ok(pageInfo);
     }
     /**
      * 跳转到硬件展示页面
      * @return
      */
-    @RequestMapping("/showSensor")
+    @RequestMapping("/equipmentExplore")
     public String showSensor(){
-        return "showSensor";
+        return "equipmentExplore";
     }
+
+    @RequestMapping("/hardwaresShow")
+    public String hardwaresShow2(){
+        return "hardwaresShow";
+    }
+
+
 
 }
