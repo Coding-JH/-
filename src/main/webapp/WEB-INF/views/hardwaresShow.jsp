@@ -95,6 +95,27 @@
         <span>硬件设备展示</span>
       </div>
       <div class="row">
+          <table border='1' width='98%' cellpadding='3' cellspacing='0'>
+              <tr height='45'bgcolor="#dfdfdf">
+                  <td >设备名称</td>
+                  <td>传感器名称</td>
+                  <td>最新数据</td>
+                  <td>创建时间</td>
+                  <td>类型</td>
+                  <td>操作</td>
+              </tr>
+              <c:forEach items="${hardList}" var="sensor">
+                  <tr height='35'>
+                      <td>智能机房巡检系统</td>
+                      <td>${sensor.name}</td>
+                      <td class="ddt"></td>
+                      <td>${sensor.created}</td>
+                      <td>${sensor.type}</td>
+                      <td><a href=""/>删除|编辑</td>
+                  </tr>
+              </c:forEach>
+          </table>
+
       </div>
     </div>
 

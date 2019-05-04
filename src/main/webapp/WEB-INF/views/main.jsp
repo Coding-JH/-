@@ -6,19 +6,20 @@
 %>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>设备巡检终端</title>
-    <link rel="stylesheet" href="/static/js/common.js">
-    <link rel="stylesheet" href="/static/js/homePage2.css">
-    <link rel="stylesheet" href="/static/js/jquery.min.css">
+    <link rel="stylesheet" href="${APP_PATH }/static/js/common.js">
+    <link rel="stylesheet" href="${APP_PATH }/static/js/homePage2.css">
+    <link rel="stylesheet" href="${APP_PATH }/static/js/jquery.min.css">
 
-    <link rel="stylesheet" href="/static/css/init.css">
-    <link rel="stylesheet" href="/static/Font-Awesome-3.2.1/Font-Awesome-3.2./cs/font-awesome.min.css" />
-    <link rel="stylesheet" href="/static/css/homePage.css">
-    <link rel="stylesheet" href="/static/css/headerAndFooter.css">
+    <link rel="stylesheet" href="${APP_PATH }/static/css/init.css">
+    <link rel="stylesheet" href="${APP_PATH }/static/Font-Awesome-3.2.1/Font-Awesome-3.2./cs/font-awesome.min.css" />
+    <link rel="stylesheet" href="${APP_PATH }/static/css/homePage.css">
+    <link rel="stylesheet" href="${APP_PATH }/static/css/headerAndFooter.css">
 </head>
 <body>
 <header>
@@ -27,6 +28,7 @@
         <!--logo-->
         <a class="items" href="<%=request.getContextPath()%>/user/next">首页</a>
         <a class="items" href="<%=request.getContextPath()%>/sensor/equipmentExplore">数据分析</a>
+        <a class="items" href="<%=request.getContextPath()%>/sensor/equipmentList">传感器列表</a>
         <a class="items" href="<%=request.getContextPath()%>/sensor/hardwaresShow">设备展示</a>
         <a class="items" href="<%=request.getContextPath()%>/user/userHelp">用户手册</a>
 

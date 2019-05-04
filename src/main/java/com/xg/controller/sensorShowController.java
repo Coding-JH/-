@@ -52,8 +52,7 @@ public class sensorShowController {
         PageHelper.startPage(pn,3);
         List<Sensor> hardList= sensorShowService.findAll();
         PageInfo pageInfo=new PageInfo(hardList,3);
-        model.addAttribute("pageInfo", pageInfo);
-        ResultMap resultMap=new ResultMap();
-        return ResultMap.ok(resultMap);
+        model.addAttribute("hardList", hardList);
+        return ResultMap.ok();
     }
 }

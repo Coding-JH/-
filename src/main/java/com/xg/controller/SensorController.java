@@ -134,6 +134,7 @@ public class SensorController {
         PageHelper.startPage(pn,5);
         List<Sensor> sensorList= sensorService.findAllSensor();
         PageInfo pageInfo=new PageInfo(sensorList,3);
+        System.out.println(pageInfo.getPages()+"----------------------------------");
         return ResultMap.ok(pageInfo);
     }
     /**
@@ -150,6 +151,10 @@ public class SensorController {
         return "hardwaresShow";
     }
 
+    @RequestMapping("/equipmentList")
+    public String equipmentList2(){
+        return "equipmentList";
+    }
 
 
 }
