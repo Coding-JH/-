@@ -4,36 +4,45 @@
 <head lang="en">
   <meta charset="UTF-8">
   <title>电力设备-电力通信的“全科医生”</title>
-  <link href="../css/init.css" rel="stylesheet">
-  <link href="../css/bootstrap.min.css" rel="stylesheet">
-  <link href="../Font-Awesome-3.2.1/Font-Awesome-3.2.1/css/font-awesome.min.css" rel="stylesheet"/>
+    <title>员工列表</title>
+    <%
+        pageContext.setAttribute("APP_PATH", request.getContextPath());
+    %>
+    <script type="text/javascript"
+            src="/static/js/jquery-1.12.4.min.js"></script>
+    <script
+            src="/static/js/bootstrap.min.js"></script>
+  <link href="/static/css/init.css" rel="stylesheet">
+  <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/Font-Awesome-3.2.1/Font-Awesome-3.2.1/css/font-awesome.min.css" rel="stylesheet"/>
   <!-- 导航和底部样式-->
-  <link href="../css/headerAndFooter.css" rel="stylesheet">
+  <link href="/static/css/headerAndFooter.css" rel="stylesheet">
   <!-- 此页面的样式-->
-  <link href="../css/equipmentList.css" rel="stylesheet">
+  <link href="/static/css/equipmentList.css" rel="stylesheet">
 </head>
 <body>
 <!--导航-->
 <header>
-  <nav class="header">
-      <img class="logo" src="../images/homePage-logo.png"/><!--logo-->
-      <a class="items" href="homePage.html">首页</a>
-      <a class="items" href="equipmentExplore.html">设备探索</a>
-      <a class="items" href="hardwaresShow.html">硬件展示</a>
-      <a class="items" href="userHelp.html">帮助文档</a>
+    <nav class="header">
+        <img class="logo" src="<%=request.getContextPath()%>/images/homePage-logo.png" />
+        <!--logo-->
+        <a class="items" href="<%=request.getContextPath()%>/user/next">首页</a>
+        <a class="items" href="<%=request.getContextPath()%>/sensor/equipmentExplore">数据分析</a>
+        <a class="items" href="<%=request.getContextPath()%>/sensor/hardwaresShow">设备展示</a>
+        <a class="items" href="<%=request.getContextPath()%>/user/userHelp">用户手册</a>
 
-      <div class="unlogin">
-          <a id="registerBtn" href="register.html">注册</a>
-          <a id="loginBtn" href="login.html">登录</a>
-      </div>
+        <div class="unlogin">
+            <a id="registerBtn" href="<%=request.getContextPath()%>/user/regist">注册</a>
+            <a id="loginBtn" href="<%=request.getContextPath()%>/user/login">登录</a>
+        </div>
 
-      <div class="logined">
-          <a class="developerBtn" href="equipmentList.html">我的设备</a>
-          <a class="developerBtn" href="userManage.html">开发者中心</a>
-          <a class="icon-bell bell" href="newMessage.html"></a>
-          <a class="icon-user user" href="userDocument.html"></a>
-      </div>
-  </nav>
+        <div class="logined">
+            <a class="developerBtn" href="<%=request.getContextPath()%>/equipmentList" style="right:200px">我的设备</a>
+            <a class="developerBtn" href="<%=request.getContextPath()%>/userManage">开发者中心</a>
+            <a class="icon-bell bell" href="<%=request.getContextPath()%>/newMessage"></a>
+            <a class="icon-user user" href="<%=request.getContextPath()%>/userDocument"></a>
+        </div>
+    </nav>
 </header>
 <!--主要内容-->
   <div class="main">
@@ -54,7 +63,7 @@
     <!-- 标题 -->
     <div class="row">
         <div class="col-md-12">
-            <h1>SSM-CRUD</h1>
+            <h1>111111</h1>
         </div>
     </div>
     <!-- 按钮 -->
@@ -104,18 +113,25 @@
 
     var totalRecord,currentPage;
     //1、页面加载完成以后，直接去发送ajax请求,要到分页数据
+    window.onload=function () {
+        to_page(1);
+        alert("440")
+    };
     $(function(){
+        $("body").html("0ee0");
+
         //去首页
         to_page(1);
     });
 
     function to_page(pn){
         $.ajax({
-            url:"${APP_PATH}/emps",
+            url:"${APP_PATH}/sensor/list",
             data:"pn="+pn,
             type:"GET",
             success:function(result){
-                //console.log(result);
+                alert(result.pageInfo.pages);
+                console.log(result);
                 //1、解析并显示员工数据
                 build_emps_table(result);
                 //2、解析并显示分页信息
@@ -132,7 +148,7 @@
         var sensorList = result.extend.pageInfo.list;
         $.each(sensorList,function(index,sensor){
             var checkBoxTd = $("<td><input type='checkbox' class='check_item'/></td>");
-            var empIdTd = $("<td></td>").append(sensor.empId);
+            var empIdTd = $("<td></td>").append(sensor.id);
             var empNameTd = $("<td></td>").append(sensor.empName);
             var genderTd = $("<td></td>").append(sensor.gender=='M'?"男":"女");
             var emailTd = $("<td></td>").append(sensor.email);
@@ -266,61 +282,61 @@
       <a href="javascript: return false;">地址：陕西省西安市长安区西安邮电大学信工实验室</a>
     </div>
   </footer>
-<script src="../js/jquery.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<!--使用json数据动态生成结构 ，，html模板引擎-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/0.9.90/jsrender.js"></script>
-<!--jqPaginator jquery分页插件-->
-<script src="../js/jqPaginator.js"></script>
-<script src="../common.js"></script>
-<script>
-  $(function(){
-//    userId = '4657c0733c5048a79e7555574a1dc564';
-    var userId = getCookie("userId");
-    if(userId){
-      $('.logined').css('display','inline-block');
-      $('.unlogin').css('display','none');
-    }else{
-      $('.unlogin').css('display','inline-block');
-      $('.logined').css('display','none');
-    }
+<%--<script src="../js/jquery.min.js"></script>--%>
+<%--<script src="../js/bootstrap.min.js"></script>--%>
+<%--<!--使用json数据动态生成结构 ，，html模板引擎-->--%>
+<%--<script src="https://cdnjs.cloudflare.com/ajax/libs/jsrender/0.9.90/jsrender.js"></script>--%>
+<%--<!--jqPaginator jquery分页插件-->--%>
+<%--<script src="../js/jqPaginator.js"></script>--%>
+<%--<script src="../common.js"></script>--%>
+<%--<script>--%>
+  <%--$(function(){--%>
+<%--//    userId = '4657c0733c5048a79e7555574a1dc564';--%>
+    <%--var userId = getCookie("userId");--%>
+    <%--if(userId){--%>
+      <%--$('.logined').css('display','inline-block');--%>
+      <%--$('.unlogin').css('display','none');--%>
+    <%--}else{--%>
+      <%--$('.unlogin').css('display','inline-block');--%>
+      <%--$('.logined').css('display','none');--%>
+    <%--}--%>
 
-    var params = {};
-    params.userId = userId;
-    params.pageNo = 1 || pageIndex;
-    $.post(ip+'/equipment/find',params,function(json){
-        if(json.type === "COMMON_SUC"){
-          var equipment = json.data;
-          var template1 = $.templates("#showEveryEquipment");
-          var htmlOutput1 = template1.render(equipment);
-          $(".showEveryEquipment").html(htmlOutput1);
+    <%--var params = {};--%>
+    <%--params.userId = userId;--%>
+    <%--params.pageNo = 1 || pageIndex;--%>
+    <%--$.post(ip+'/equipment/find',params,function(json){--%>
+        <%--if(json.type === "COMMON_SUC"){--%>
+          <%--var equipment = json.data;--%>
+          <%--var template1 = $.templates("#showEveryEquipment");--%>
+          <%--var htmlOutput1 = template1.render(equipment);--%>
+          <%--$(".showEveryEquipment").html(htmlOutput1);--%>
 
-          // 创建分页
-          //将num值传给后台
-          $("#Pagination").jqPaginator({
-            totalPages: equipment.pageNum,
-            visiblePages: 5,
-            currentPage: 1,
-            onPageChange: function (num, type) {
-              pageIndex = num;
-              return pageIndex;
-            },
-            first: '<li class="first"><a href="javascript:void(0);">首页<\/a><\/li>',
-            prev: '<li class="prev"><a href="javascript:void(0);"><i class="arrow arrow2"><\/i>上一页<\/a><\/li>',
-            next: '<li class="next"><a href="javascript:void(0);">下一页<i class="arrow arrow3"><\/i><\/a><\/li>',
-            last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',
-            page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>'
-          });
+          <%--// 创建分页--%>
+          <%--//将num值传给后台--%>
+          <%--$("#Pagination").jqPaginator({--%>
+            <%--totalPages: equipment.pageNum,--%>
+            <%--visiblePages: 5,--%>
+            <%--currentPage: 1,--%>
+            <%--onPageChange: function (num, type) {--%>
+              <%--pageIndex = num;--%>
+              <%--return pageIndex;--%>
+            <%--},--%>
+            <%--first: '<li class="first"><a href="javascript:void(0);">首页<\/a><\/li>',--%>
+            <%--prev: '<li class="prev"><a href="javascript:void(0);"><i class="arrow arrow2"><\/i>上一页<\/a><\/li>',--%>
+            <%--next: '<li class="next"><a href="javascript:void(0);">下一页<i class="arrow arrow3"><\/i><\/a><\/li>',--%>
+            <%--last: '<li class="last"><a href="javascript:void(0);">末页<\/a><\/li>',--%>
+            <%--page: '<li class="page"><a href="javascript:void(0);">{{page}}<\/a><\/li>'--%>
+          <%--});--%>
 
-        }else if(json.type === "Equipment_REQ_ERROR"){
-          alert("设备请求参数错误！")
-        }else if(json.type === "Equipment_FIND_ERROR"){
-          alert("设备信息查询失败！")
-        }
-    },'json').fail(function(json){
-      alert("请求失败，请稍后再试")
-    });
-  });
-</script>
+        <%--}else if(json.type === "Equipment_REQ_ERROR"){--%>
+          <%--alert("设备请求参数错误！")--%>
+        <%--}else if(json.type === "Equipment_FIND_ERROR"){--%>
+          <%--alert("设备信息查询失败！")--%>
+        <%--}--%>
+    <%--},'json').fail(function(json){--%>
+      <%--alert("请求失败，请稍后再试")--%>
+    <%--});--%>
+  <%--});--%>
+<%--</script>--%>
 </body>
 </html>
