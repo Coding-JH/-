@@ -17,7 +17,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean checkUser(String name) {
         long count = userMapper.countByName(name);
-        System.out.println(count+"-------------");
         return count == 0;
     }
 

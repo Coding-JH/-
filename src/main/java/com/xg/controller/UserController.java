@@ -31,9 +31,10 @@ public class UserController {
     @ResponseBody
     public ResultMap login(User user, HttpSession session){
         String code=user.getPassword();
+        System.out.println(user.getUsername()+"--------------------");
         User user1=userService.loginUser(user.getUsername());
         ResultMap resultMap=new ResultMap();
-        if(null!=user1){
+        if(user!=null){
             if(user1.getPassword().equals(code)){
                 session.setAttribute("name",user1.getUsername());
                 resultMap.setStatus(200);
@@ -56,9 +57,9 @@ public class UserController {
      * @return
      */
     @RequestMapping("/outLogin")
-    public String outLogin(HttpSession session) {
+    public ResultMap outLogin(HttpSession session) {
         session.invalidate();
-        return "login";
+        return ResultMap.ok();
     }
     /**
      * 注册
@@ -67,7 +68,10 @@ public class UserController {
      * @return
      */
     @RequestMapping(value ="/regist",method =RequestMethod.POST)
+    @ResponseBody
     public ResultMap register(User user, HttpSession session) {
+        System.out.println(user.getUsername());
+        System.out.println(user.getPassword());
         ResultMap resultMap=new ResultMap();
         //数据库用户名重复校验
         String userName=user.getUsername();
@@ -109,28 +113,28 @@ public class UserController {
         }
     }
 
-    /**
-     * 跳转到展示开发者文档界面
-     * @return
-     */
-    @RequestMapping("/userHelp")
-    public String userHelp(){
-        return "userHelp";
-    }
-    /**
-     * 跳转到个人主页
-     * @return
-     */
-    @RequestMapping(value ="/login",method= RequestMethod.GET)
-    public String userlogin(){
-        return "login";
-    }
-    @RequestMapping(value ="/regist",method= RequestMethod.GET)
-    public String userregist(){
-        return "regist";
-    }
-    @RequestMapping(value ="/next",method= RequestMethod.GET)
-    public String next(){
-        return "main";
-    }
+//    /**
+//     * 跳转到展示开发者文档界面
+//     * @return
+//     */
+//    @RequestMapping("/userHelp")
+//    public String userHelp(){
+//        return "userHelp";
+//    }
+//    /**
+//     * 跳转到个人主页
+//     * @return
+//     */
+//    @RequestMapping(value ="/login",method= RequestMethod.GET)
+//    public String userlogin(){
+//        return "login";
+//    }
+//    @RequestMapping(value ="/regist",method= RequestMethod.GET)
+//    public String userregist(){
+//        return "regist";
+//    }
+//    @RequestMapping(value ="/next",method= RequestMethod.GET)
+//    public String next(){
+//        return "main";
+//    }
 }

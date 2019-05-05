@@ -48,10 +48,10 @@ public class SensorController {
      * @return
      */
     @RequestMapping("/search")
-    public String search(@RequestParam String name, Model model){
+    public ResultMap search(@RequestParam String name, Model model){
         List<Sensor> searchList=sensorService.searchByName(name);
-        model.addAttribute("searchList",searchList);
-        return "/sensor/list";
+//        model.addAttribute("searchList",searchList);
+        return ResultMap.ok(searchList);
     }
 
     /**
@@ -93,7 +93,7 @@ public class SensorController {
      */
     @RequestMapping("/add")
     @ResponseBody
-    public ResultMap addSensor(Sensor sensor, SensorShow sensorShow){
+    public ResultMap addSensor(Sensor sensor,SensorShow sensorShow){
         Long id=IDUtils.genItemId();
         ResultMap resultMap=new ResultMap();
         if(sensor!=null) {
@@ -141,20 +141,20 @@ public class SensorController {
      * 跳转到硬件展示页面
      * @return
      */
-    @RequestMapping("/equipmentExplore")
-    public String showSensor(){
-        return "equipmentExplore";
-    }
-
-    @RequestMapping("/hardwaresShow")
-    public String hardwaresShow2(){
-        return "hardwaresShow";
-    }
-
-    @RequestMapping("/equipmentList")
-    public String equipmentList2(){
-        return "equipmentList";
-    }
+//    @RequestMapping("/equipmentExplore")
+//    public String showSensor(){
+//        return "equipmentExplore";
+//    }
+//
+//    @RequestMapping("/hardwaresShow")
+//    public String hardwaresShow2(){
+//        return "hardwaresShow";
+//    }
+//
+//    @RequestMapping("/equipmentList")
+//    public String equipmentList2(){
+//        return "equipmentList";
+//    }
 
 
 }

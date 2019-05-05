@@ -37,7 +37,7 @@ public class SensorDescController {
         sensorDesc.setTime(new Date());
         sensorDesc.setId(IDUtils.genItemId());
         //sensorDescService.addData(data);
-        return null;
+        return ResultMap.ok(sensorDesc);
 
 
     }

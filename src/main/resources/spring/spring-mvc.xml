@@ -10,20 +10,20 @@
 	<!-- 2. 扫描Controller  SpringMVC：子容器-->
 	<context:component-scan base-package="com.xg.controller"/>
 	<!--登录拦截器-->
-	<!--<mvc:interceptors>-->
-		<!--<mvc:interceptor>-->
-			<!--<mvc:mapping path="/sensor/**"/>-->
-			<!--<bean class="com.xg.Interceptor.LoginInterceptor"/>-->
-		<!--</mvc:interceptor>-->
-		<!--<mvc:interceptor>-->
-			<!--<mvc:mapping path="/hard/**"/>-->
-			<!--<bean class="com.xg.Interceptor.LoginInterceptor"/>-->
-		<!--</mvc:interceptor>-->
-		<!--<mvc:interceptor>-->
-			<!--<mvc:mapping path="/sensorDesc/**"/>-->
-			<!--<bean class="com.xg.Interceptor.LoginInterceptor"/>-->
-		<!--</mvc:interceptor>-->
-	<!--</mvc:interceptors>-->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/sensor/**"/>
+			<bean class="com.xg.Interceptor.LoginInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/hard/**"/>
+			<bean class="com.xg.Interceptor.LoginInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/sensorDesc/**"/>
+			<bean class="com.xg.Interceptor.LoginInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	<!-- 3. 视图解析器：指定jsp文件的目录 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/"/>

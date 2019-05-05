@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-<jsp:forward page="/user/next"/>
+<h1>Hello</h1>
+
 </body>
 </html>

@@ -47,12 +47,12 @@ public class sensorShowController {
      */
     @RequestMapping("show")
     @ResponseBody
-    public ResultMap listSensor(@RequestParam(value = "pn",defaultValue = "1")Integer pn, Model model){
+    public ResultMap listSensor(@RequestParam(value = "pn",defaultValue = "1")Integer pn, Model model,HttpServletRequest request){
 
         PageHelper.startPage(pn,3);
         List<Sensor> hardList= sensorShowService.findAll();
         PageInfo pageInfo=new PageInfo(hardList,3);
-        model.addAttribute("hardList", hardList);
-        return ResultMap.ok();
+//        model.addAttribute("hardList", hardList);
+        return ResultMap.ok(pageInfo);
     }
 }
